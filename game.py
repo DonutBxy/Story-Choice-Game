@@ -27,6 +27,8 @@ font6 = pygame.font.SysFont('times new roman', 15)
 room1b = Background('room1b.jpg', [0,0])
 stairs = Background('stairs.jpg', [0,0])
 three_doors = Background('three doors.jpg', [0,0])
+corridor_1 = Background('corridor1.jpg',[0,0])
+pond = Background('pond.jpg',[0,0])
 
 def draw_text(text,font,color,surface,x,y):
     textobj = font.render(text,1,color)
@@ -76,11 +78,9 @@ def story():
     click = False
 
     while running:
+
         screen.fill((0,0,0))
         mx, my = pygame.mouse.get_pos()
-
-
-        draw_text('The Beginning',font, (255,255,255), screen,260,50)
         
         draw_text('Wake Up...',font3, (255,0,0), screen,340,250)
 
@@ -327,7 +327,7 @@ def hide1():
         screen.fill((0,0,0))
         mx, my = pygame.mouse.get_pos()
         
-        draw_text('You look around for a place to hide... but there are none',font4, (255,255,255), screen,125,210)
+        draw_text('You look around for a place to hide... but there are none',font2, (255,255,255), screen,125,210)
 
         hide1_button = pygame.Rect(300,400,150,50)
 
@@ -444,7 +444,7 @@ def stairs1():
 
         mx, my = pygame.mouse.get_pos()
         
-        draw_text('You quicky go down the stairs',font4, (255,255,255), screen,270,80)
+        draw_text('You quicky go down the stairs',font2, (255,255,255), screen,270,80)
 
         hide1_button = pygame.Rect(300,400,150,50)
 
@@ -485,8 +485,8 @@ def stairs2():
 
         mx, my = pygame.mouse.get_pos()
         
-        draw_text('You find yourself in front of three doors',font4, (255,255,255), screen,230,20)
-        draw_text('Which door will you take?',font4, (255,255,255), screen,270,50)
+        draw_text('You find yourself in front of three doors',font2, (255,255,255), screen,230,20)
+        draw_text('Which door will you take?',font2, (255,255,255), screen,270,50)
 
         room_a_button = pygame.Rect(130,420,150,50)
         room_b_button = pygame.Rect(330,420,150,50)
@@ -528,7 +528,211 @@ def stairs2():
         mainClock.tick(60)  
 
 def room_a():
-    pass
+
+    running = True
+    click = False
+
+    while running:
+
+        pygame.display.flip()
+        screen.blit(corridor_1.image, corridor_1.rect)
+
+        mx, my = pygame.mouse.get_pos()
+        
+        draw_text('You open the door and quickly head inside.',font2, (255,255,255), screen,210,120)
+        draw_text('It is dark but you must keep going.',font2, (255,255,255), screen,240,160)
+
+        pond_button = pygame.Rect(300,400,150,50)
+
+        if pond_button.collidepoint((mx,my)):
+            if click:
+                pond_1()
+
+        pygame.draw.rect(screen, (255,255,255), pond_button)
+
+        draw_text('Continue',font2, (0,0,0), screen,335,410)
+        
+        click = False
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        running = False
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
+
+        pygame.display.update()
+        mainClock.tick(60)  
+
+def pond_1():
+
+    running = True
+    click = False
+
+    while running:
+
+        pygame.display.flip()
+        screen.blit(pond.image, pond.rect)
+
+        mx, my = pygame.mouse.get_pos()
+        
+        draw_text('You find yourself in a sea cavern.',font2, (255,255,255), screen,330,120)
+        draw_text('Will you climb the vines or keep going forard?',font2, (255,255,255), screen,280,160)
+
+        pond_button = pygame.Rect(300,400,150,50)
+
+        vines_button = pygame.Rect(130,420,150,50)
+        forward_button = pygame.Rect(330,420,150,50)
+
+        if vines_button.collidepoint((mx,my)):
+            if click:
+                vines()
+        if forward_button.collidepoint((mx,my)):
+            if click:
+                cave()
+
+        pygame.draw.rect(screen, (255,255,255), vines_button)
+        pygame.draw.rect(screen, (255,255,255), forward_button)
+
+        draw_text('Door 1',font2, (0,0,0), screen,170,430)
+        draw_text('Door 2',font2, (0,0,0), screen,370,430)
+        
+        click = False
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        running = False
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
+
+        pygame.display.update()
+        mainClock.tick(60)  
+
+def vines():
+    running = True
+    click = False
+
+    while running:
+        screen.fill((0,0,0))
+        mx, my = pygame.mouse.get_pos()
+        
+        draw_text('You start climbing until you hear something below you',font2, (255,255,255), screen,170,150)
+
+        vines2_button = pygame.Rect(300,400,150,50)
+
+        if vines2_button.collidepoint((mx,my)):
+            if click:
+                vines2()
+
+        pygame.draw.rect(screen, (255,255,255), vines2_button)
+
+        draw_text('Continue',font2, (0,0,0), screen,335,410)
+        
+        click = False
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        running = False
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
+
+        pygame.display.update()
+        mainClock.tick(60)
+
+def vines2():
+    running = True
+    click = False
+
+    while running:
+        screen.fill((0,0,0))
+        mx, my = pygame.mouse.get_pos()
+        
+        draw_text("It's not that easy",font5, (255,0,0), screen,260,150)
+
+        hide1_button = pygame.Rect(300,400,150,50)
+
+        if hide1_button.collidepoint((mx,my)):
+            if click:
+                gameover()
+
+        pygame.draw.rect(screen, (255,255,255), hide1_button)
+
+        draw_text('Continue',font2, (0,0,0), screen,335,410)
+        
+        click = False
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        running = False
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
+
+        pygame.display.update()
+        mainClock.tick(60) 
+
+def cave():
+    running = True
+    click = False
+
+    while running:
+
+        pygame.display.flip()
+        screen.blit(chest.image, chest.rect)
+
+        mx, my = pygame.mouse.get_pos()
+        
+        draw_text('You open the door and quickly head inside.',font2, (255,255,255), screen,210,120)
+        draw_text('It is dark but you must keep going.',font2, (255,255,255), screen,240,160)
+
+        pond_button = pygame.Rect(300,400,150,50)
+
+        if pond_button.collidepoint((mx,my)):
+            if click:
+                pond_1()
+
+        pygame.draw.rect(screen, (255,255,255), pond_button)
+
+        draw_text('Continue',font2, (0,0,0), screen,335,410)
+        
+        click = False
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        running = False
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
+
+        pygame.display.update()
+        mainClock.tick(60)  
 
 def room_b():
     running = True
